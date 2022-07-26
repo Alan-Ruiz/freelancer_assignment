@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.pagy-combo-nav-js .page.next {
+  &:hover {
+    @apply text-gray-800;
+  }
+
+  &:active {
+    @apply text-gray-800;
+  }
+}
+
+.pagy-combo-nav-js .page.prev.disabled,
+.pagy-combo-nav-js .page.next.disabled {
+  @apply text-gray-400 cursor-default;
+}

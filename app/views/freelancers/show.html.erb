@@ -1,13 +1,36 @@
-<div>
+<div class="container">
   Freelancer Profile
-</div>
 
-<div>
-  <%= @freelancer.user.first_name %>
-</div>
 
-<div>
-<%= @freelancer.feature? ? "You are featured!" : " Become featured! []" %>
-</div>
+  <div>
+    <ul>
+      <li>
+        NAME: <%= @freelancer.user.first_name %>
+      </li>
+      <li>
+        LAST NAME: <%= @freelancer.user.last_name %>
+      </li>
+      <li>
+        RATE: <%= @freelancer.rate %>
+      </li>
+      <li>
+        BIO: <%= @freelancer.bio %>
+      </li>
+    </ul>
+  </div>
 
-<%= link_to "Go back", freelancers_path %>
+  <div>
+  <% if @freelancer.feature?  %>
+    <%= "You are featured!" %>
+    <% else %>
+    <%= " Become featured! " %>
+    <%= simple_form_for @freelancer do |f| %>
+      <%= f.input :feature, label: '<----Make yourself featured!' %>
+      <%= f.submit "Do it!", data: { 'turbo-method': :patch } %>
+    <% end %>
+  <% end %>
+  </div>
+
+
+  <%= link_to "Go back", freelancers_path %>
+</div>

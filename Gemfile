@@ -36,8 +36,14 @@ gem "redis", "~> 4.0"
 # Devise for users
 gem "devise"
 
+# Pg search
+gem "pg_search"
+
 # Faker for seeds
 gem "faker"
+
+ # Pagy gem for pagination
+  gem 'pagy'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -79,3 +85,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "tailwindcss-rails", "~> 2.0"

@@ -1,10 +1,33 @@
 <div class="container">
+
+<% if user_signed_in? %>
+  <%= link_to "Go to your profile", dashboard_path(current_user)%>
+<% else %>
+  <%= link_to "LOG IN", new_user_session_path %>
+  <%= link_to "SIGN UP", new_user_registration_path %>
+<% end %>
   <h1>All the freelancers</h1>
   Hourly rate filter
+
+  <%= form_tag freelancers_path, method: :get do %>
+  <%= text_field_tag :query1, 
+    params[:query1],
+    class: "form-control",
+    placeholder: "Find by rate"
+  %>
+  <%= text_field_tag :query2, 
+    params[:query2],
+    class: "form-control",
+    placeholder: "Find by rate"
+  %>
+  <%= submit_tag "search" %>
+  <% end %>
+
+   <%== pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"') %>
   <ul>
     <% @freelancers.each_with_index do |freelancer, index| %>
       <li>
-      <%= link_to "#{index + 1}- #{freelancer.user.first_name} #{freelancer.user.last_name} - #{freelancer.feature}", freelancer_path(freelancer) %>
+      <%= link_to "#{index + 1}- #{freelancer.user.first_name} #{freelancer.user.last_name} - #{freelancer.feature} $#{freelancer.rate}", freelancer_path(freelancer) %>
       </li>
     <% end %>
   </ul>
