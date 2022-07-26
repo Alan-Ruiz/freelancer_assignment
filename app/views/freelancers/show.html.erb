@@ -1,0 +1,13 @@
+<div>
+  Freelancer Profile
+</div>
+
+<div>
+  <%= @freelancer.user.first_name %>
+</div>
+
+<div>
+<%= @freelancer.feature? ? "You are featured!" : " Become featured! []" %>
+</div>
+
+<%= link_to "Go back", freelancers_path %>
