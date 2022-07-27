@@ -1,3 +1,24 @@
-my dashboard
+  <div>
+    <ul>
+      <li>
+        my dashboard
+      </li>
+      <li>
+       Welcome  <%= @user.first_name %>!
+      </li>
+      <li>
+        <%= link_to "Become a freelancer!", new_freelancer_path if !@user.freelancer  %>
+      </li>
+      <li>
+        <%= link_to "EDIT", edit_user_registration_path(@user), data: { "turbo-method": :update }  %>
+      </li>
+      <li>
+        <%= link_to "Delete your Freelancer profile", freelancer_path(@user.freelancer), data: { "turbo-method": :delete, confirm: "You are about to delete your Freelancer profile, are you sure?" } if @user.freelancer %>
+      </li>
+      <li>
+        <%= link_to "Go back", freelancers_path %>
+      </li>
+    </ul>
+  </div>
 
-<%= @user.first_name %>
+

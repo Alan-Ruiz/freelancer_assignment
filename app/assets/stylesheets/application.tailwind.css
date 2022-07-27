@@ -11,7 +11,7 @@
   &:active {
     @apply text-gray-800;
   }
-}
+} */
 
 .pagy-combo-nav-js .page.prev.disabled,
 .pagy-combo-nav-js .page.next.disabled {
