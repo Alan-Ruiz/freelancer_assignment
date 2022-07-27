@@ -1,5 +1,7 @@
 <div class="container">
-
+<h1 class="text-3xl font-bold underline">
+    Hello world!
+</h1>
 <% if user_signed_in? %>
   <%= link_to "Go to your profile", dashboard_path(current_user)%>
   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
@@ -11,6 +13,8 @@
   <h1>All the freelancers</h1>
   Hourly rate filter
 
+<label for="default-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default range</label>
+<input id="default-range" type="range" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
   <%= form_tag freelancers_path, method: :get do %>
   <%= text_field_tag :query1, 
     params[:query1],
@@ -28,9 +32,11 @@
    <%== pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"') %>
   <ul>
     <% @freelancers.each_with_index do |freelancer, index| %>
-      <li>
-      <%= link_to "#{index + 1}- #{freelancer.user.first_name} #{freelancer.user.last_name} - #{freelancer.feature} $#{freelancer.rate}", freelancer_path(freelancer) %>
-      </li>
+      <div class="box-content h-4 w-85 p-4 border-4 ...">
+        <li>
+          <%= link_to "#{index + 1}- #{freelancer.user.first_name} #{freelancer.user.last_name} - #{freelancer.feature} $#{freelancer.rate}", freelancer_path(freelancer) %>
+        </li>
+      </div>
     <% end %>
   </ul>
 </div>
