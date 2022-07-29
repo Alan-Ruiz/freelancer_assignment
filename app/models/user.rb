@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :freelancer
+
+  validates :first_name, :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
 end

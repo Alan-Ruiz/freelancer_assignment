@@ -3,22 +3,19 @@ class FreelancersController < ApplicationController
   
   def index
     if params[:query2].present?
-      query = Freelancer.where(rate: params[:query1]..params[:query2])
-      @pagy, @freelancers = pagy(query.order(feature: :desc))
+      query = Freelancer.where(rate: params[:query1]..params[:query2]).order(feature: :desc).map do  |freelancer| 
+        freelancer.attributes.merge!("full_name" => freelancer.full_name)
+      end
+      @pagy, @freelancers = pagy_array(query)
     else
-      # @pagy, @freelancers = pagy(Freelancer.includes(:user).where(id: all_freelancers_ids))
-      # @pagy, @freelancers = pagy(all_freelancers_ids)
-      @pagy, @freelancers = pagy(Freelancer.order(feature: :desc))
-      #preload users because that is how it is shown on the index page (freelance.user)
+      @pagy, @freelancers = pagy_array(all_freelancers)
     end
-    # @pagy, @records = pagy(Product.some_scope)
-    # @pagy, @freelancers = pagy(Freelancer.where(rate: 1..300))
   end
 
   def show
   end
 
-  def new
+  def new 
     @freelancer = Freelancer.new
   end 
 
@@ -30,9 +27,6 @@ class FreelancersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
@@ -58,18 +52,11 @@ class FreelancersController < ApplicationController
     params.require(:freelancer).permit(:feature, :bio, :rate, :user_id)
   end
 
-  # def all_freelancers_ids
-  #   Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
-  #     puts "HEELO IM HERE YOOOOOOOOO"
-  #     Freelancer.includes(:user).order(feature: :desc)
-  #   end
-
-    #caching activerecords
-  # end
-
-  # def all_freelancers
-  #   Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
-  #     Freelancer.order(feature: :desc)
-  #   end
-  # end
+  def all_freelancers
+    @all_freelancers ||= Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
+      Freelancer.includes(:user).order(feature: :desc).map do  |freelancer| 
+        freelancer.attributes.merge!("full_name" => freelancer.full_name)
+      end
+    end
+  end
 end

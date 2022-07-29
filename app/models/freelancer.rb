@@ -1,10 +1,12 @@
 class Freelancer < ApplicationRecord
   belongs_to :user
 
-  # include PgSearch::Model
-  # pg_search_scope :search_by_rate,
-  # against: [ :rate ],
-  # using: {
-  #   tsearch: { prefix: false } 
-  # }
+  validates :bio, presence: :true,  length: { minimum: 20 }
+  validates :rate, presence: :true, numericality: { only_integer: true }
+
+  delegate :first_name, :last_name, to: :user
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
