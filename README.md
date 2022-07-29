@@ -7,7 +7,6 @@ Ruby on Rails 7
 Hotwire - Turbo + Stimulus
 TailwindCSS
 esbuild
-devise gem and pagy gem
 
 You can SignUp in this website to create your own user. You also can create your own freelancer profile, where you can edit you BIO and RATE, once you
 have a freelancer profile, you will be shown in the home page with all the rest of the freelancers, if you want to appear amongst the top of the list, you can make your profile featured, just click the button on your profile page.
