@@ -9,5 +9,14 @@ TailwindCSS
 esbuild
 devise gem and pagy gem
 
+You can SignUp in this website to create your own user. You also can create your own freelancer profile, where you can edit you BIO and RATE, once you
+have a freelancer profile, you will be shown in the home page with all the rest of the freelancers, if you want to appear amongst the top of the list, you can make your profile featured, just click the button on your profile page.
+
+There is a filter for the hourly rate of the freelancers for easier search in the home page.
+
+You can run some tests on your teminal for the models typing "rspec"
+
+
+Having more time I would like to implement more tests and make the pagination work with Hotwire so it only refreshes the list wrapper.
 
 
