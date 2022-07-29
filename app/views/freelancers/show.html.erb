@@ -2,8 +2,6 @@
   <h1 class="text-3xl font-bold underline">
    Freelancer Profile
   </h1>
-
-
   <div>
     <ul>
       <li>
@@ -13,26 +11,35 @@
         LAST NAME: <%= @freelancer.user.last_name %>
       </li>
       <li>
-        RATE: <%= @freelancer.rate %>
+        RATE: $<%= @freelancer.rate %>/hr
       </li>
       <li>
         BIO: <%= @freelancer.bio %>
       </li>
     </ul>
   </div>
-
-  <div>
-  <% if @freelancer.feature?  %>
-    <%= "You are featured!" %>
+  
+  <% if user_signed_in? && current_user.freelancer.id == @freelancer.id %>  
+    <% if @freelancer.feature?  %>
+      <%= "You are featured!" %>
     <% else %>
-    <%= " Become featured! " %>
-    <%= simple_form_for @freelancer do |f| %>
-      <%= f.input :feature, label: '<----Make yourself featured!' %>
-      <%= f.submit "Do it!", data: { 'turbo-method': :patch } %>
+      <%= " Become featured! " %>
+      <%= simple_form_for @freelancer do |f| %>
+        <%= f.input :feature, label: '<----Make yourself featured!' %>
+        <%= f.submit "Do it!", data: { 'turbo-method': :patch } %>
+      <% end %>
     <% end %>
+
+    <div class="mt-28">
+      <%= simple_form_for @freelancer do |f| %>
+        <%= f.input :bio %>
+        <%= f.input :rate %>
+        <%= f.submit "Submit" %>
+      <% end %>
+    </div>
   <% end %>
-  </div>
 
-
-  <%= link_to "Go back", freelancers_path %>
+  <%= link_to freelancers_path do %>
+    <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Go Back</button>
+  <% end %>
 </div>
