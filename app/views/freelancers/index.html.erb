@@ -1,24 +1,24 @@
 <div class="container">
-  <h1 class="text-3xl font-bold underline">
+  <h1 class="text-3xl font-bold underline mb-4">
     All the freelancers
   </h1>
-  <div class=" data-controller= overflow-x-auto mb-16 relative relative shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-        <%= form_tag freelancers_path, method: :get do %>
+  <div class="overflow-x-auto mb-16 relative relative shadow-md sm:rounded-lg">
+        <%= form_tag freelancers_path, method: :get, data: { controller: "refresher", refresher_target: "form", turbo_frame: "freelancers" } do %>
           <div class="grid md:grid-cols-3 md:gap-6">
             <div class="relative z-0 mb-6 w-full group">
               <%= text_field_tag :query1, 
                 params[:query1],
                 class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
-                placeholder: "Min rate"
+                placeholder: "Min rate",
+                data: { action: "input->refresher#search" }
               %>
             </div>
             <div class="relative z-0 mb-6 w-full group">
               <%= text_field_tag :query2, 
                 params[:query2],
                 class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
-                placeholder: "Max rate"
+                placeholder: "Max rate",
+                data: { action: "input->refresher#search" }
               %>
             </div>
             <div class="relative z-0 mb-6 w-full group">
@@ -26,37 +26,7 @@
             </div>
           </div>
         <% end %>
-        <%== pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"') %>
-      </caption>
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="py-3 px-6">
-            Name
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Feature
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Rate
-          </th>
-        </tr>
-      </thead>
-      <tbody data-controller="refresher">
-        <% @freelancers.each do |freelancer| %>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= link_to freelancer["full_name"], freelancer_path(freelancer["id"]) %>
-            </th>
-            <td class="py-4 px-6">
-              <%= freelancer["feature"] %>
-            </td>
-            <td class="py-4 px-6">
-              $<%= freelancer["rate"] %>/hr
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+         <%= render 'freelancers', freelancers: @freelancers, pagy: @pagy %>
   </div>
 </div>
 

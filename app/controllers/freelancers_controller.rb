@@ -6,7 +6,8 @@ class FreelancersController < ApplicationController
       query = Freelancer.where(rate: params[:query1]..params[:query2]).order(feature: :desc).map do  |freelancer| 
         freelancer.attributes.merge!("full_name" => freelancer.full_name)
       end
-      @pagy, @freelancers = pagy_array(query)
+      pagy, freelancers = pagy_array(query)
+      render(partial: 'freelancers', locals: { freelancers: freelancers, pagy: pagy })
     else
       @pagy, @freelancers = pagy_array(all_freelancers)
     end

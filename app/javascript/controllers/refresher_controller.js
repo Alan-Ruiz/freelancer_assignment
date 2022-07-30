@@ -1,10 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
-import { Input } from "postcss"
 
 // Connects to data-controller="refresher"
 export default class extends Controller {
-  static targets = ["input", "results"]
+  static targets = ["form"]
   connect() {
-    // console.log(this.element)
+  }
+
+  search() {
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(() => {
+      this.formTarget.requestSubmit()
+    }, 800)
+    console.log(this.element)
   }
 }
