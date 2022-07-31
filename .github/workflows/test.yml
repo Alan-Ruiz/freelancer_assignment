@@ -52,9 +52,7 @@ jobs:
           cp config/database.github.yml config/database.yml
           bundle exec rails db:create db:migrate
       - name: Setup Chrome
-        run:
-        command: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        run:  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
       - name: Run model tests
         run: bundle exec rails test
