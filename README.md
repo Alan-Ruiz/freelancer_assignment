@@ -13,7 +13,7 @@ have a freelancer profile, you will be shown in the home page with all the rest 
 
 There is a filter for the hourly rate of the freelancers for easier search in the home page.
 
-You can run some tests on your teminal for the models typing "rspec"
+You can run some tests on your teminal for the models typing "rspec", "rails test:models" & "rails test:system"
 
 
 Having more time I would like to implement more tests and make the pagination work with Hotwire so it only refreshes the list wrapper.
