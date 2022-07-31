@@ -1,32 +1,32 @@
 <div class="container">
   <h1 class="text-3xl font-bold underline mb-4">
-    All the freelancers
+    Browse our freelancers
   </h1>
   <div class="overflow-x-auto mb-16 relative relative shadow-md sm:rounded-lg">
-        <%= form_tag freelancers_path, method: :get, data: { controller: "refresher", refresher_target: "form", turbo_frame: "freelancers" } do %>
-          <div class="grid md:grid-cols-3 md:gap-6">
-            <div class="relative z-0 mb-6 w-full group">
-              <%= text_field_tag :query1, 
-                params[:query1],
-                class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
-                placeholder: "Min rate",
-                data: { action: "input->refresher#search" }
-              %>
-            </div>
-            <div class="relative z-0 mb-6 w-full group">
-              <%= text_field_tag :query2, 
-                params[:query2],
-                class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
-                placeholder: "Max rate",
-                data: { action: "input->refresher#search" }
-              %>
-            </div>
-            <div class="relative z-0 mb-6 w-full group">
-              <%= submit_tag "search", class:"py-2.5 px-5 mr-2 mb-2 w-full text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"%>
-            </div>
-          </div>
-        <% end %>
-         <%= render 'freelancers', freelancers: @freelancers, pagy: @pagy %>
+    <%= form_tag freelancers_path, method: :get, data: { controller: "refresher", refresher_target: "form", turbo_frame: "freelancers" } do %>
+      <div class="grid md:grid-cols-3 md:gap-6">
+        <div class="relative z-0 mb-6 w-full group">
+          <%= text_field_tag :query1, 
+            params[:query1],
+            class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
+            placeholder: "Min rate",
+            data: { action: "input->refresher#search" }
+          %>
+        </div>
+        <div class="relative z-0 mb-6 w-full group">
+          <%= text_field_tag :query2, 
+            params[:query2],
+            class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
+            placeholder: "Max rate",
+            data: { action: "input->refresher#search" }
+          %>
+        </div>
+        <div class="relative z-0 mb-6 w-full group">
+          <%= submit_tag "search", class:"py-2.5 px-5 mr-2 mb-2 w-full text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"%>
+        </div>
+      </div>
+    <% end %>
+    <%= render 'freelancers', freelancers: @freelancers, pagy: @pagy %>
   </div>
 </div>
 

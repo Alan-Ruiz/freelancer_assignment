@@ -1,5 +1,5 @@
 class FreelancersController < ApplicationController
-  before_action :set_freelancer, only: [:show, :update, :edit, :destroy]
+  before_action :set_freelancer, only: [:show, :update, :destroy]
   
   def index
     if params[:query2].present?
@@ -54,8 +54,8 @@ class FreelancersController < ApplicationController
   end
 
   def all_freelancers
-    @all_freelancers ||= Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
-      Freelancer.includes(:user).order(feature: :desc).map do  |freelancer| 
+    Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
+      Freelancer.order(feature: :desc).map do  |freelancer| 
         freelancer.attributes.merge!("full_name" => freelancer.full_name)
       end
     end
