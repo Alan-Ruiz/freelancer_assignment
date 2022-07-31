@@ -42,11 +42,11 @@ gem "pg_search"
 # Faker for seeds
 gem "faker"
 
- # Pagy gem for pagination
-  gem 'pagy'
+# Pagy gem for pagination
+gem 'pagy'
 
-  #Prybyebug for debugging
-  gem 'pry-byebug', '~> 3.9'
+#Prybyebug for debugging
+gem 'pry-byebug', '~> 3.9'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -86,7 +86,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "~> 4.3.0"
   gem "webdrivers"
   gem "rspec-rails"
   gem "shoulda-matchers"
