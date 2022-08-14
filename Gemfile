@@ -42,11 +42,11 @@ gem "pg_search"
 # Faker for seeds
 gem "faker"
 
- # Pagy gem for pagination
-  gem 'pagy'
+# Pagy gem for pagination
+gem 'pagy'
 
-  #Prybyebug for debugging
-  gem 'pry-byebug', '~> 3.9'
+#Prybyebug for debugging
+gem 'pry-byebug', '~> 3.9'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -69,6 +69,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "launchy"
 end
 
 group :development do

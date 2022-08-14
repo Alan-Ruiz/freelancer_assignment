@@ -1,12 +1,13 @@
 class FreelancersController < ApplicationController
-  before_action :set_freelancer, only: [:show, :update, :edit, :destroy]
+  before_action :set_freelancer, only: [:show, :update, :destroy]
   
   def index
     if params[:query2].present?
       query = Freelancer.where(rate: params[:query1]..params[:query2]).order(feature: :desc).map do  |freelancer| 
         freelancer.attributes.merge!("full_name" => freelancer.full_name)
       end
-      @pagy, @freelancers = pagy_array(query)
+      pagy, freelancers = pagy_array(query)
+      render(partial: 'freelancers', locals: { freelancers: freelancers, pagy: pagy })
     else
       @pagy, @freelancers = pagy_array(all_freelancers)
     end
@@ -53,8 +54,8 @@ class FreelancersController < ApplicationController
   end
 
   def all_freelancers
-    @all_freelancers ||= Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
-      Freelancer.includes(:user).order(feature: :desc).map do  |freelancer| 
+    Rails.cache.fetch("all_freelancers", expires_in: 24.hours) do
+      Freelancer.order(feature: :desc).map do  |freelancer| 
         freelancer.attributes.merge!("full_name" => freelancer.full_name)
       end
     end

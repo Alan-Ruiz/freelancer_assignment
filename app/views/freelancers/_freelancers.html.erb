@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "freelancers" do %>
+<table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-3 px-6">
+          Name
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Feature
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Rate
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%== pagy_nav(pagy, link_extra: 'data-turbo-action="advance"') %>
+        <% freelancers.each do |freelancer| %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= link_to freelancer["full_name"], freelancer_path(freelancer["id"]) %>
+            </th>
+            <td class="py-4 px-6">
+              <%= freelancer["feature"] %>
+            </td>
+            <td class="py-4 px-6">
+              $<%= freelancer["rate"] %>/hr
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </caption>
+</table>
